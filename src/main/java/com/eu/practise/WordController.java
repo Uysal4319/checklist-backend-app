@@ -11,10 +11,13 @@ import java.util.List;
 @RestController
 public class WordController {
 
-    @Autowired
-    private WordRepository repository;
-
-    @PostMapping(path = "/addWord", consumes = "application/json", produces = "application/json")
+    private final WordRepository repository;
+	
+	public WordController(WordRepository repository) {
+		this.repository = repository;
+	}
+	
+	@PostMapping(path = "/addWord", consumes = "application/json", produces = "application/json")
     public String saveItem(@RequestBody WordItem item){
 
         List<WordItem> words =  repository.findAll();
